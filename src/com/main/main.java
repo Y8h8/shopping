@@ -38,7 +38,7 @@ public class main {
                     }
                 }
                 case 4 -> {
-                    new AddPeople().add();
+                    new AddPeople();
                 }
             }
         }
