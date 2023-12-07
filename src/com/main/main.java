@@ -1,5 +1,6 @@
 package com.main;
 
+import com.bean.AddPeople;
 import com.bean.Goods;
 import com.test.TanChu;
 
@@ -35,6 +36,9 @@ public class main {
                         Goods g = it.next();
                         System.out.println(g.getName()+g.getNumber()+g.getPrice());
                     }
+                }
+                case 4 -> {
+                    new AddPeople().add();
                 }
             }
         }
