@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class AddPeople implements Add {
     @Override
-     public Object add() {
+     public People add() {
         People people = null;
         Scanner s = new Scanner(System.in);
         System.out.println("1.root注册\n2.user注册\n");
@@ -19,6 +19,7 @@ public class AddPeople implements Add {
                 people.setName(s.next());
                 System.out.print("密码:");
                 people.setPassword(s.next());
+                people.setType(1);
                 //System.out.print("资金:");
                 //people.setMoney(s.nextDouble());
                 //System.out.println();
@@ -30,6 +31,7 @@ public class AddPeople implements Add {
                 people.setName(s.next());
                 System.out.print("\n密码:");
                 people.setPassword(s.next());
+                people.setType(2);
                 //System.out.print("\n资金:");
                 //people.setMoney(s.nextDouble());
                 //System.out.println();
@@ -38,10 +40,5 @@ public class AddPeople implements Add {
         return people;
 
 
-    }
-
-    @Override
-    public Goods add() {
-        return null;
     }
 }

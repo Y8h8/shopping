@@ -1,5 +1,5 @@
 package com.tool;
 
 interface Find {
-    void find();
+    Object find(String s);
 }
