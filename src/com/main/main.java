@@ -1,9 +1,6 @@
 package com.main;
 
-import com.bean.AddGoods;
-import com.bean.AddPeople;
-import com.bean.Goods;
-import com.bean.People;
+import com.bean.*;
 import com.test.TanChu;
 
 import javax.swing.*;
@@ -22,12 +19,22 @@ public class main {
         while (true){
 
             switch (s.nextInt()){
-                case 1 -> {}
-                //用户名称
-                case 2 -> {
-                    System.out.println("返回");
+                //商品查询
+                case 1 -> {
+                    String k = null;
+                    Goods w = new FindGoods().find(k,goods);
+                    if (w == null){
+                        System.out.println("没有商品");
+                    }else {
+                        System.out.println("商品名称:" + w.getName() + "\t数量:" + w.getNumber() + "\t价格:" + w.getPrice());
+                    }
+
                 }
-                //商品输出
+                //用户名称查询
+                case 2 -> {
+
+                }
+                //所有商品输出
                 case 3 -> {
                     System.out.println("商品名称：\t数量：\t价格：\t");
                     Iterator<Goods> it = goods.iterator();
