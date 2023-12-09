@@ -2,6 +2,7 @@ package com.main;
 
 import com.bean.AddPeople;
 import com.bean.Goods;
+import com.bean.People;
 import com.test.TanChu;
 
 import javax.swing.*;
@@ -11,24 +12,20 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        //选择商品
+        //选择功能
         Scanner s = new Scanner(System.in);
+        ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
         while (true){
 
             switch (s.nextInt()){
+                //登入界面
                 case 1 ->  SwingUtilities.invokeLater(Menu::createAndShowGUI);
+                //用户名称
                 case 2 -> {
-                    System.out.println("添加");
-                    Goods k =new Goods();
-                    System.out.print("姓名：");
-                    k.setName(s.next());
-                    System.out.print("数量：");
-                    k.setNumber(s.nextInt());
-                    System.out.print("价格：");
-                    k.setPrice(s.nextDouble());
-                    goods.add(k);
+
                 }
+                //商品输出
                 case 3 -> {
                     System.out.println("姓名：\t数量：\t价格：\t");
                     Iterator<Goods> it = goods.iterator();
@@ -37,9 +34,14 @@ public class main {
                         System.out.println(g.getName()+g.getNumber()+g.getPrice());
                     }
                 }
+                //用户添加
                 case 4 -> {
-                    new AddPeople();
+                    
+
                 }
+                //商品添加
+                case 5 -> {}
+
             }
         }
     }

@@ -1,10 +1,11 @@
 package com.bean;
 
-public class Root extends People{
+public class Root extends People {
     public Root() {
     }
 
-    public Root(String name, String password, double money) {
-        super(name, password, money);
+    public Root(String name, String password, double money, int type) {
+        super(name, password, money, type);
     }
 }
+

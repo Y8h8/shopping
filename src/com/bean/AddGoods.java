@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class AddGoods implements Add {
     @Override
-    public void add() {
+    public Goods add() {
         Scanner s = new Scanner(System.in);
         Goods goods = new Goods();
         System.out.print("商品名:");
@@ -15,5 +15,6 @@ public class AddGoods implements Add {
         goods.setNumber(s.nextInt());
         System.out.print("价格:");
         goods.setPrice(s.nextDouble());
+        return null;
     }
 }

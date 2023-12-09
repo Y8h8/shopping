@@ -4,14 +4,15 @@ public class People {
     private String name;
     private String password;
     private double money;
-
+    private int type;
     public People() {
     }
 
-    public People(String name, String password, double money) {
+    public People(String name, String password, double money, int type) {
         this.name = name;
         this.password = password;
         this.money = money;
+        this.type = type;
     }
 
     public String getName() {
@@ -32,6 +33,14 @@ public class People {
 
     public double getMoney() {
         return money;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public void setMoney(double money) {
