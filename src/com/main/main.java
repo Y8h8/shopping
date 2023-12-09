@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
+        //登入界面
+        new LoginUI().Login();
         //选择功能
         Scanner s = new Scanner(System.in);
         ArrayList<People> people = new ArrayList<>();
@@ -20,8 +22,7 @@ public class main {
         while (true){
 
             switch (s.nextInt()){
-                //登入界面
-                case 1 -> new LoginUI().Login();
+                case 1 -> {}
                 //用户名称
                 case 2 -> {
 
