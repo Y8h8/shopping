@@ -1,5 +1,7 @@
 package com.tool;
 
-interface Del {
-    void del(Object object);
+import java.util.ArrayList;
+
+public interface Del {
+    void del(Object object, ArrayList arrayList);
 }

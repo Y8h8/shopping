@@ -126,29 +126,25 @@ public class LoginUI extends People {
         JPasswordField passwordField = new JPasswordField(10);
         JTextField usertypeField = new JTextField(10);
 
-        // 创建登录按钮，并为其设置事件监听器（这里只是打印出登录信息）
-        JButton loginButton = new JButton("登录/注册");
-        loginButton.addActionListener(e -> {
-            String username = usernameField.getText();
-            char[] passwordChars = passwordField.getPassword();
-            String password = new String(passwordChars);
-            int type = Integer.parseInt(usertypeField.getText());
-            String people1 = null;
-            if (type == 1){
-                people1 = "商家";
-            }else if (type == 2){
-                people1 = "用户";
-            }
-            people.setName(username);
-            people.setPassword(password);
-            people.setType(type);
-            System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1);
-        });
 
 
 
         // 使用GridLayout布局管理器
         JPanel panel = new JPanel(new GridLayout(4, 2));
+
+
+
+        // 将面板添加到窗口中
+        jf.add(panel);
+
+        // 设置窗口居中显示
+        jf.setLocationRelativeTo(null);
+
+        // 显示窗口
+        jf.setVisible(true);
+
+        // 创建登录按钮，并为其设置事件监听器（这里只是打印出登录信息）
+        JButton loginButton = new JButton("登录/注册");
 
         // 将所有组件添加到面板上
         panel.add(usernameLabel);
@@ -160,15 +156,20 @@ public class LoginUI extends People {
         panel.add(new JLabel()); // 空白占位符
         panel.add(loginButton);
 
-        // 将面板添加到窗口中
-        jf.add(panel);
 
-        // 设置窗口居中显示
-        jf.setLocationRelativeTo(null);
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+            int type = Integer.parseInt(usertypeField.getText());
+            String[] people1 = {"商家","用户"};
+            people.setName(username);
+            people.setPassword(password);
+            people.setType(type);
+            System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1[type-1]);
+            jf.dispose();
+        });
 
-        // 显示窗口
-        jf.setVisible(true);
         return people;
     }
-
 }

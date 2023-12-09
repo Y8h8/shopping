@@ -9,30 +9,37 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class main {
+    static Scanner s = new Scanner(System.in);
+
+    static String[] people1 = {"商家","用户"};
     public static void main(String[] args) {
         //登入界面
-        Scanner s = new Scanner(System.in);
         ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
+
         people.add(new LoginUI().Login());
+
+
         //选择功能
         while (true){
 
             switch (s.nextInt()){
                 //商品查询
                 case 1 -> {
-                    String k = null;
-                    Goods w = new FindGoods().find(k,goods);
+                    Goods w = gdfind(goods);
                     if (w == null){
-                        System.out.println("没有商品");
+                        System.out.println("没有找到商品");
                     }else {
                         System.out.println("商品名称:" + w.getName() + "\t数量:" + w.getNumber() + "\t价格:" + w.getPrice());
                     }
-
                 }
-                //用户名称查询
+                //全部用户名称查询
                 case 2 -> {
-
+                    Iterator<People> it = people.iterator();
+                    while (it.hasNext()){
+                        People p = it.next();
+                        System.out.println("用户名称:" + p.getName() + "\t年龄:" + p.getPassword() + "\t类型:" + people1[p.getType()-1]);
+                    }
                 }
                 //所有商品输出
                 case 3 -> {
@@ -51,9 +58,49 @@ public class main {
                 case 5 -> {
                     goods.add(new AddGoods().add());
                 }
+                //用户查询
+                case 6 -> {
+                    People w = ppfind(people);
+                    if (w == null){
+                        System.out.println("没有用户");
+                    }else {
+                        System.out.println("用户名称:" + w.getName() + "\t年龄:" + w.getPassword() + "\t类型:" + people1[w.getType()-1]);
+                    }
+                }
+                case 7 -> {
+                    People w = ppfind(people);
+                    if (w == null){
+                        System.out.println("没有用户");
+                    }else {
+                        new DelPeople().del(w,people);
+                        System.out.println("删除成功!");
+                    }
+                }
+                case 8 -> {
+                    Goods w = gdfind(goods);
+                    if (w == null){
+                        System.out.println("没有商品");
+                    }else {
+                        new DelGoods().del(w,goods);
+                        System.out.println("删除成功!");
+                    }
+                }
 
             }
         }
+    }
+    public static People ppfind(ArrayList people){
+        System.out.print("用户名名称:");
+        String k = s.next();
+        People w = new FindPeople().find(k,people);
+        return w;
+
+    }
+    public static Goods gdfind(ArrayList goods){
+        System.out.print("商品名称:");
+        String k = s.next();
+        Goods w = new FindGoods().find(k,goods);
+        return w;
     }
 
 }
