@@ -1,4 +1,4 @@
-package com.main;
+/*package com.main;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -96,4 +96,58 @@ public class Menu extends JFrame {
       //  SwingUtilities.invokeLater(Menu::createAndShowGUI);
         /*new TanChu();*/
     //}
+//}
+package com.main;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class LoginUI {
+    public  void Login() {
+        // 创建一个新的JFrame实例作为主窗口
+        JFrame jf = new JFrame("登录界面");
+
+        // 设置窗口尺寸
+        jf.setSize(400, 250);
+
+        // 设置关闭操作为退出应用程序
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // 创建标签并添加到窗口中
+        JLabel usernameLabel = new JLabel("用户名:");
+        JLabel passwordLabel = new JLabel("密码:");
+
+        // 创建文本框用于输入用户名和密码
+        JTextField usernameField = new JTextField(15);
+        JPasswordField passwordField = new JPasswordField(15);
+
+        // 创建登录按钮，并为其设置事件监听器（这里只是打印出登录信息）
+        JButton loginButton = new JButton("登录/注册");
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+            System.out.println("用户名: " + username + ", 密码: " + password);
+        });
+
+        // 使用GridLayout布局管理器
+        JPanel panel = new JPanel(new GridLayout(3, 2));
+
+        // 将所有组件添加到面板上
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(new JLabel()); // 空白占位符
+        panel.add(loginButton);
+
+        // 将面板添加到窗口中
+        jf.add(panel);
+
+        // 设置窗口居中显示
+        jf.setLocationRelativeTo(null);
+
+        // 显示窗口
+        jf.setVisible(true);
+    }
 }

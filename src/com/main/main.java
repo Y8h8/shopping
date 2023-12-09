@@ -1,5 +1,6 @@
 package com.main;
 
+import com.bean.AddGoods;
 import com.bean.AddPeople;
 import com.bean.Goods;
 import com.bean.People;
@@ -20,27 +21,28 @@ public class main {
 
             switch (s.nextInt()){
                 //登入界面
-                case 1 ->  SwingUtilities.invokeLater(Menu::createAndShowGUI);
+                case 1 -> new LoginUI().Login();
                 //用户名称
                 case 2 -> {
 
                 }
                 //商品输出
                 case 3 -> {
-                    System.out.println("姓名：\t数量：\t价格：\t");
+                    System.out.println("商品名称：\t数量：\t价格：\t");
                     Iterator<Goods> it = goods.iterator();
                     while (it.hasNext()){
                         Goods g = it.next();
-                        System.out.println(g.getName()+g.getNumber()+g.getPrice());
+                        System.out.println(g.getName() + "\t\t\t" + g.getNumber() + "\t\t" + g.getPrice() + "\t");
                     }
                 }
                 //用户添加
                 case 4 -> {
-                    
-
+                    people.add(new AddPeople().add());
                 }
                 //商品添加
-                case 5 -> {}
+                case 5 -> {
+                    goods.add(new AddGoods().add());
+                }
 
             }
         }

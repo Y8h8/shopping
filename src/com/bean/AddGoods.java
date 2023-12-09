@@ -15,6 +15,6 @@ public class AddGoods implements Add {
         goods.setNumber(s.nextInt());
         System.out.print("价格:");
         goods.setPrice(s.nextDouble());
-        return null;
+        return goods;
     }
 }

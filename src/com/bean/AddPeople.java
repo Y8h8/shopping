@@ -20,6 +20,7 @@ public class AddPeople implements Add {
                 System.out.print("密码:");
                 people.setPassword(s.next());
                 people.setType(1);
+                people.setMoney(0.0);
                 //System.out.print("资金:");
                 //people.setMoney(s.nextDouble());
                 //System.out.println();
@@ -32,6 +33,7 @@ public class AddPeople implements Add {
                 System.out.print("\n密码:");
                 people.setPassword(s.next());
                 people.setType(2);
+                people.setMoney(0.0);
                 //System.out.print("\n资金:");
                 //people.setMoney(s.nextDouble());
                 //System.out.println();
