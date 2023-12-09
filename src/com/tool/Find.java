@@ -1,5 +1,7 @@
 package com.tool;
 
-interface Find {
-    Object find(String s);
+import java.util.ArrayList;
+
+public interface Find {
+    Object find(String s, ArrayList<Object> objectArrayList);
 }

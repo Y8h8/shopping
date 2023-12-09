@@ -14,18 +14,18 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args) {
         //登入界面
-        new LoginUI().Login();
-        //选择功能
         Scanner s = new Scanner(System.in);
         ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
+        people.add(new LoginUI().Login());
+        //选择功能
         while (true){
 
             switch (s.nextInt()){
                 case 1 -> {}
                 //用户名称
                 case 2 -> {
-
+                    System.out.println("返回");
                 }
                 //商品输出
                 case 3 -> {

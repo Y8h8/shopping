@@ -99,11 +99,14 @@ public class Menu extends JFrame {
 //}
 package com.main;
 
+import com.bean.People;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginUI {
-    public  void Login() {
+public class LoginUI extends People {
+    public  People Login() {
+        People people = new People();
         // 创建一个新的JFrame实例作为主窗口
         JFrame jf = new JFrame("登录界面");
 
@@ -116,10 +119,12 @@ public class LoginUI {
         // 创建标签并添加到窗口中
         JLabel usernameLabel = new JLabel("用户名:");
         JLabel passwordLabel = new JLabel("密码:");
+        JLabel usertypeLabel = new JLabel("输入数字:1.商家\t2.用户");
 
         // 创建文本框用于输入用户名和密码
-        JTextField usernameField = new JTextField(15);
-        JPasswordField passwordField = new JPasswordField(15);
+        JTextField usernameField = new JTextField(10);
+        JPasswordField passwordField = new JPasswordField(10);
+        JTextField usertypeField = new JTextField(10);
 
         // 创建登录按钮，并为其设置事件监听器（这里只是打印出登录信息）
         JButton loginButton = new JButton("登录/注册");
@@ -127,17 +132,31 @@ public class LoginUI {
             String username = usernameField.getText();
             char[] passwordChars = passwordField.getPassword();
             String password = new String(passwordChars);
-            System.out.println("用户名: " + username + ", 密码: " + password);
+            int type = Integer.parseInt(usertypeField.getText());
+            String people1 = null;
+            if (type == 1){
+                people1 = "商家";
+            }else if (type == 2){
+                people1 = "用户";
+            }
+            people.setName(username);
+            people.setPassword(password);
+            people.setType(type);
+            System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1);
         });
 
+
+
         // 使用GridLayout布局管理器
-        JPanel panel = new JPanel(new GridLayout(3, 2));
+        JPanel panel = new JPanel(new GridLayout(4, 2));
 
         // 将所有组件添加到面板上
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
         panel.add(passwordField);
+        panel.add(usertypeLabel);
+        panel.add(usertypeField);
         panel.add(new JLabel()); // 空白占位符
         panel.add(loginButton);
 
@@ -149,5 +168,7 @@ public class LoginUI {
 
         // 显示窗口
         jf.setVisible(true);
+        return people;
     }
+
 }
