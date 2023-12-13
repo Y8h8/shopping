@@ -1,5 +1,5 @@
 package com.tool;
 
-interface Alter {
-    Object alter(Object object);
+public interface Alter {
+    void alter(Object object);
 }

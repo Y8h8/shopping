@@ -1,9 +1,9 @@
 package com.main;
 
 import com.bean.*;
-import com.test.TanChu;
+import com.tool.IO;
 
-import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ public class main {
     static Scanner s = new Scanner(System.in);
 
     static String[] people1 = {"商家","用户"};
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //登入界面
         ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
@@ -38,7 +38,7 @@ public class main {
                     Iterator<People> it = people.iterator();
                     while (it.hasNext()){
                         People p = it.next();
-                        System.out.println("用户名称:" + p.getName() + "\t年龄:" + p.getPassword() + "\t类型:" + people1[p.getType()-1]);
+                        System.out.println("用户名称:" + p.getName() + "\t年龄:" + p.getPassword() + "\t类型:" + people1[p.getType()]);
                     }
                 }
                 //所有商品输出
@@ -64,18 +64,20 @@ public class main {
                     if (w == null){
                         System.out.println("没有用户");
                     }else {
-                        System.out.println("用户名称:" + w.getName() + "\t年龄:" + w.getPassword() + "\t类型:" + people1[w.getType()-1]);
+                        System.out.println("用户名称:" + w.getName() + "\t年龄:" + w.getPassword() + "\t类型:" + people1[w.getType()]);
                     }
                 }
+                //删除用户
                 case 7 -> {
                     People w = ppfind(people);
                     if (w == null){
-                        System.out.println("没有用户");
+                        System.out.println("没有该用户");
                     }else {
                         new DelPeople().del(w,people);
                         System.out.println("删除成功!");
                     }
                 }
+                //删除商品
                 case 8 -> {
                     Goods w = gdfind(goods);
                     if (w == null){
@@ -84,6 +86,19 @@ public class main {
                         new DelGoods().del(w,goods);
                         System.out.println("删除成功!");
                     }
+                }
+                //更改用户信息
+                case 9 -> {
+                    new AlterPeople().alter(ppfind(people));
+                }
+                //更改商品信息
+                case 10 -> {
+                    new AlterGoods().alter(gdfind(goods));
+                }
+                //用户保存
+                case 11 -> {
+                        new IO().IPeopleFile(people);
+
                 }
 
             }
