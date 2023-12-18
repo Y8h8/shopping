@@ -63,11 +63,11 @@ public class LoginUI extends People {
             char[] passwordChars = passwordField.getPassword();
             String password = new String(passwordChars);
             int type = Integer.parseInt(usertypeField.getText());
-            String[] people1 = {"商家","用户"};
+            //String[] people1 = {"商家","用户"};
             people.setName(username);
             people.setPassword(password);
             people.setType(type-1);
-            System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1[people.getType()]);
+            //System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1[people.getType()]);
             jf.dispose();
         });
 

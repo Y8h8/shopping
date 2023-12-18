@@ -4,7 +4,7 @@ public class People {
     private String name;
     private String password;
     private double money;
-    private int type;
+    private int type ;
     public People() {
     }
 
