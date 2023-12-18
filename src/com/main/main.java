@@ -8,22 +8,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import static com.tool.IO.readTxt;
+import static com.tool.IO.writeFile;
+
 public class main {
     static Scanner s = new Scanner(System.in);
 
     static String[] people1 = {"商家","用户"};
+    static String filePath = "d:\\javaShopping.txt";
     public static void main(String[] args) throws IOException {
         //登入界面
         ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
         ArrayList<Goods> ygoods = new ArrayList<>();
+        String readTxt = readTxt(filePath);
         People p1 =new LoginUI().Login();
-        people.add(p1);
-
-
         //选择功能
          p:while (true){
             System.out.print("输入p继续:");
+            people.add(p1);
+            writeFile(filePath,p1.getName() + "\t\t" + p1.getPassword() + "\t\t" + people1[p1.getType()]);
             String h = s.next();
             if (!h.equals("p")){
                 System.out.println("输入错误!");
@@ -105,7 +109,7 @@ public class main {
                     }
                     //用户保存
                     case 11 -> {
-                        new IO().IPeopleFile(people);
+                        //new IO().IPeopleFile(people);
 
                     }
 

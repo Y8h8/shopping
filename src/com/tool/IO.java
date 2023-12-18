@@ -48,12 +48,7 @@ public class IO {
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-    /**
-     * @author ssy
-     * 读取文件内容
-     * @date 2020/8/8 16:26
-     */
-    public class IO{
+public class IO{
 
         public static String readTxt(String filePath) {
             StringBuilder lineTxt = new StringBuilder();
@@ -77,13 +72,6 @@ import java.nio.charset.StandardCharsets;
             }
             return lineTxt.toString();
         }
-
-        /**
-         * 写入文件
-         * @param filePath 文件路径
-         * @param content 文件内容
-         * @throws IOException
-         */
         public static void writeFile(String filePath, String content) throws IOException {
             //true表示追加内容
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true));
@@ -91,14 +79,6 @@ import java.nio.charset.StandardCharsets;
             //换行
             bufferedWriter.newLine();
             bufferedWriter.close();
-            System.out.println("写入文件成功");
+            System.out.println("保存成功");
         }
-        public static void main(String[] args) throws IOException {
-            String filePath = "d:\\javaShopping.txt";
-            //读取文件
-            String readTxt = readTxt(filePath);
-            System.out.println(readTxt);
-            //写入文件
-            writeFile(filePath,"文件内容");
-        }
-    }
+}
