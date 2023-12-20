@@ -1,18 +1,17 @@
 package com.tool;
-/*import com.bean.People;
+import com.bean.Goods;
+import com.bean.People;
 
 import java.io.IOException;
 import java.io.File;
 import java.io.*;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
+
 
 public class IO {
     static String[] people1 = {"商家","用户"};
     public void IPeopleFile(ArrayList<People> pp) throws IOException {
-        File f = new File("d:\\javaShopping.txt");
+        File f = new File("d:\\javaShoppingUser.txt");
 
         if (f.exists()) {
             System.out.print("文件存在");
@@ -22,7 +21,7 @@ public class IO {
         }
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(f,true));
-        bw.newLine();
+
         bw.flush();
 
         for (People s : pp) {
@@ -30,9 +29,9 @@ public class IO {
             String password = s.getPassword();
             String type = people1[s.getType()];
 
-            bw.write(name + "\t\t");
-            bw.write(password + "\t\t");
-            bw.write(type + "\t\t");
+            bw.write(name + ",");
+            bw.write(password + ",");
+            bw.write(type);
             bw.newLine();
             bw.flush();
         }
@@ -40,45 +39,75 @@ public class IO {
         System.out.println("存储成功!");
     }
 
-    public void OPeopleFile(File file) {
+    public String OPeopleFile(String file1) {
+                StringBuilder lineTxt = new StringBuilder();
+                try {
+                    File file = new File(file1);
+                    if(file.isFile() && file.exists()) {
+                        InputStreamReader isr = new InputStreamReader(new FileInputStream(file));
+                        BufferedReader br = new BufferedReader(isr);
+                        String lineTxt1;
+                        while ((lineTxt1 = br.readLine()) != null) {
+                            lineTxt.append(lineTxt1).append("\n");
+                        }
 
+                        br.close();
 
-    }
-}*/
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-
-public class IO{
-
-        public static String readTxt(String filePath) {
-            StringBuilder lineTxt = new StringBuilder();
-            try {
-                File file = new File(filePath);
-                if(file.isFile() && file.exists()) {
-                    InputStreamReader isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-                    BufferedReader br = new BufferedReader(isr);
-                    String lineTxt1;
-                    while ((lineTxt1 = br.readLine()) != null) {
-                        lineTxt.append(lineTxt1).append("\n");
+                    } else {
+                        //System.out.println("文件不存在!");
                     }
-
-                    br.close();
-
-                } else {
-                    System.out.println("文件不存在!");
+                } catch (Exception e) {
+                    System.out.println("文件读取错误!");
                 }
-            } catch (Exception e) {
-                System.out.println("文件读取错误!");
+                return lineTxt.toString();
+    }
+
+    public String OGoodsFile(String file1){
+        StringBuilder lineTxt = new StringBuilder();
+        try {
+            File file = new File(file1);
+            if(file.isFile() && file.exists()) {
+                InputStreamReader isr = new InputStreamReader(new FileInputStream(file));
+                BufferedReader br = new BufferedReader(isr);
+                String lineTxt1;
+                while ((lineTxt1 = br.readLine()) != null) {
+                    lineTxt.append(lineTxt1).append("\n");
+                }
+
+                br.close();
+
+            } else {
+                //System.out.println("文件不存在!");
             }
-            return lineTxt.toString();
+        } catch (Exception e) {
+            System.out.println("文件读取错误!");
         }
-        public static void writeFile(String filePath, String content) throws IOException {
-            //true表示追加内容
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true));
-            bufferedWriter.write(content);
-            //换行
-            bufferedWriter.newLine();
-            bufferedWriter.close();
-            System.out.println("保存成功");
+        return lineTxt.toString();
+    }
+    public void IGoodsFile(ArrayList<Goods> goodsArrayList) throws IOException {
+        File f = new File("d:\\javaShoppingGoods.txt");
+        if (f.exists()) {
+            System.out.print("文件存在");
+        } else {
+            System.out.print("文件不存在,正在创建...");
+            f.createNewFile();
         }
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f,true));
+
+        for (Goods s : goodsArrayList) {
+            String name = s.getName();
+            double price = s.getPrice();
+            int number = s.getNumber();
+
+            bw.write(name + ",");
+            bw.write(price + ",");
+            bw.write(number + "\n");
+            bw.flush();
+        }
+
+        bw.close();
+        System.out.println("存储成功!");
+    }
+
 }
