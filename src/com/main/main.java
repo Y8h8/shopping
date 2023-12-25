@@ -21,12 +21,31 @@ public class main {
         ArrayList<People> people = new ArrayList<>();
         ArrayList<Goods> goods = new ArrayList<>();
         ArrayList<Goods> ygoods = new ArrayList<>();
-        People p1 =new LoginUI().Login();
-        System.out.print("输入p继续:");
-        String h = s.next();
+
+        String  h;
+
+        //读取用户
+        People p1;
         IO ioo = new IO();
         String string = ioo.OPeopleFile(filePath);
         String[] hh1 = string.split("\n");
+        //System.out.println(hh1[0]);
+        for (String string1 : hh1) {
+            String[] ee = string1.split(",");
+
+            p1 = new People();
+            p1.setName(ee[0]);
+            p1.setPassword(ee[1]);
+            if (ee[2].equals(people1[0])){
+                p1.setType(0);
+            }else if (ee[2].equals(people1[1])){
+                p1.setType(1);
+            }
+            people.add(p1);
+
+        }
+
+        //读取商品
         IO goo = new IO();
         String string2 = goo.OGoodsFile(filePath1);
         String[] gg1 = string2.split("\n");
@@ -40,28 +59,44 @@ public class main {
             }
 
         }
-        boolean hhh = false;
-        for (String string1 : hh1) {
-            String[] ee = string1.split(",");
-            /*if (ee[2].equals(people1[0])){
-                People ppl = new People(ee[0],ee[1],0.0,0);
-            }else if (ee[2].equals(people1[1])){
-                People ppl = new People(ee[0],ee[1],0.0,1);
-            }*/
-            if (ee[0].equals(p1.getName())&&ee[1].equals(p1.getPassword())&&ee[2].equals(people1[p1.getType()])){
-                hhh = true;
+
+        while (true){
+            p1 =new LoginUI().Login();
+            System.out.println("输入0登入：");
+            boolean hhh = false;
+            if (s.nextInt() == 0){
+                for (People ppp : people){
+                    if ((p1.getName().equals(ppp.getName()))&&(p1.getType() == ppp.getType())){
+                        hhh = true;
+                        if (p1.getPassword().equals(ppp.getPassword())){
+                            break;
+                        }else {
+                            System.out.println("密码错误!");
+                        }
+
+                    }
+                }
+
+                if (!hhh){
+                    //如果没找到添加到用户集合中
+                    people.add(p1);
+                    break;
+                }
             }
+
+
         }
-        if (!hhh){
-            //如果没找到添加到用户集合中
-            people.add(p1);
-        }
-        //System.out.println(hh1[1]);
+
+        System.out.print("输入p继续,其他退出:");
+        h = s.next();
+
+
+
         //选择功能
          p:while (true){
             //暂停一下
             if (!h.equals("p")){
-                System.out.println("输入错误!");
+                System.out.println("输入错误!已经退出");
                 break;
             }
 
@@ -83,13 +118,10 @@ public class main {
                             System.out.println("商品名称:" + w.getName() + "\t数量:" + w.getNumber() + "\t价格:" + w.getPrice());
                         }
                     }
-                    //全部用户名称查询
+
+                    //商品添加
                     case 2 -> {
-                        Iterator<People> it = people.iterator();
-                        while (it.hasNext()){
-                            People p = it.next();
-                            System.out.println("用户名称:" + p.getName() + "\t密码:" + p.getPassword() + "\t类型:" + people1[p.getType()]);
-                        }
+                        goods.add(new AddGoods().add());
                     }
                     //所有商品输出
                     case 3 -> {
@@ -100,21 +132,32 @@ public class main {
                             System.out.println(g.getName() + "\t\t\t" + g.getNumber() + "\t\t" + g.getPrice() + "\t");
                         }
                     }
-                    //用户添加
+                    //删除商品
                     case 4 -> {
-                        people.add(new AddPeople().add());
+                        Goods w = gdfind(goods);
+                        if (w == null){
+                            System.out.println("没有商品");
+                        }else {
+                            new DelGoods().del(w,goods);
+                            System.out.println("删除成功!");
+                        }
                     }
-                    //商品添加
-                    case 5 -> {
-                        goods.add(new AddGoods().add());
-                    }
+
                     //用户查询
-                    case 6 -> {
+                    case 5 -> {
                         People w = ppfind(people);
                         if (w == null){
                             System.out.println("没有用户");
                         }else {
                             System.out.println("用户名称:" + w.getName() + "\t密码:" + w.getPassword() + "\t类型:" + people1[w.getType()]);
+                        }
+                    }
+                    //全部用户名称查询
+                    case 6 -> {
+                        Iterator<People> it = people.iterator();
+                        while (it.hasNext()){
+                            People p = it.next();
+                            System.out.println("用户名称:" + p.getName() + "\t密码:" + p.getPassword() + "\t类型:" + people1[p.getType()]);
                         }
                     }
                     //删除用户
@@ -127,15 +170,9 @@ public class main {
                             System.out.println("删除成功!");
                         }
                     }
-                    //删除商品
+                    //用户添加
                     case 8 -> {
-                        Goods w = gdfind(goods);
-                        if (w == null){
-                            System.out.println("没有商品");
-                        }else {
-                            new DelGoods().del(w,goods);
-                            System.out.println("删除成功!");
-                        }
+                        people.add(new AddPeople().add());
                     }
                     //更改用户信息
                     case 9 -> {
@@ -153,6 +190,10 @@ public class main {
 
                 }
             }else if (p1.getType() == 1){
+
+                //保存用户名
+                new IO().IPeopleFile(people);
+
                 //用户
                 System.out.println();
                 Menu1();
@@ -189,8 +230,8 @@ public class main {
                                     w.setNumber(ynum-num);
                                     ygoods.add(w1);
                                 }
-
                             }
+
                             System.out.println("输入0返回,输入1继续:");
                             int vvv = s.nextInt();
                             if (vvv == 0){
@@ -201,8 +242,14 @@ public class main {
                     }
                     case 3 -> {
                         //结账
+                        new IO().IGoodsFile(goods);
                         double hh =  new SumGoods().sum(ygoods);
                         System.out.println("总和:" + String.format("%.2f",hh));
+
+                    }
+                    case 4 -> {
+                        //评价功能
+
                     }
                 }
             }else {
@@ -228,7 +275,7 @@ public class main {
         return w;
     }
     public static void Menu(){
-        System.out.println("0.退出\t\t\t1.商品查询\n2.全部用户名称查询\t3.所有商品输出\n4.用户添加\t\t5.商品添加\n6.用户查询\t\t7.删除用户\n8.删除商品\t\t9.更改用户信息\n10.更改商品信息\t11.保存");
+        System.out.println("0.退出\t\t\t\t1.商品查询\n2.商品添加\t\t\t3.所有商品输出\n4.删除商品\t\t\t5.用户查询\n6.全部用户名称查询\t\t7.删除用户\n8.用户添加\t\t\t9.更改用户信息\n10.更改商品信息\t\t11.保存");
         System.out.print("请输入选项:");
     }
     public static void Menu1(){

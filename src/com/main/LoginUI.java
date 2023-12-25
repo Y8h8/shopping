@@ -1,6 +1,7 @@
 package com.main;
 
 import com.bean.People;
+import com.tool.IO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +55,8 @@ public class LoginUI extends People {
         panel.add(passwordField);
         panel.add(usertypeLabel);
         panel.add(usertypeField);
-        panel.add(new JLabel()); // 空白占位符
+        // 空白占位符
+        panel.add(new JLabel());
         panel.add(loginButton);
 
 
@@ -63,11 +65,10 @@ public class LoginUI extends People {
             char[] passwordChars = passwordField.getPassword();
             String password = new String(passwordChars);
             int type = Integer.parseInt(usertypeField.getText());
-            //String[] people1 = {"商家","用户"};
             people.setName(username);
             people.setPassword(password);
             people.setType(type-1);
-            //System.out.println("用户名: " + username + ", 密码: " + password + ", 类型：" + people1[people.getType()]);
+
             jf.dispose();
         });
 
